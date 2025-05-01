@@ -275,6 +275,7 @@ include '_head.php';
           <div class="job-group">
             <input type="text" name="position" placeholder="Position" required>
             <input type="text" name="salary" placeholder="Salary" required>
+            <input type="text" name="employer" placeholder="Employer" required>
             <input type="text" name="nameofthenewprincipal" placeholder="Name of the New Principal" required>
           </div>
           <div>
@@ -282,7 +283,8 @@ include '_head.php';
             <h6 style="display: inline-block; margin-left: 165px;">Date of Departure:</h6>
           </div>
           <div class="employment-group">
-            <input type="text" name="employmentduration" placeholder="Employment Duration" required>
+            <input type="date" name="employmentdurationstart" placeholder="Employment Duration Start" required>
+            <input type="date" name="employmentdurationend" placeholder="Employment Duration End" required>
             <input type="date" name="dateofarrival" placeholder="Date of Arrival" required>
             <input type="date" name="dateofdeparture" placeholder="Date of Departure" required>
 
@@ -384,23 +386,28 @@ function searchTable() {
 }
 
 function GenerateAC(bmid) {
-  alert("For Generating Assessment Country chuchu.");
+  //alert("For Generating Assessment Country chuchu.");
+  window.location.href = `generate_ac.php?bmid=${bmid}`;
 }
 function GenerateNVC(bmid) {
-  alert("For Generating No Verified Contract Clearance chuchu.");
+  //alert("For Generating No Verified Contract Clearance chuchu.");
+  window.location.href = `generate_nvc.php?bmid=${bmid}`;
 }
 function GenerateCS(bmid) {
-  alert("For Generating Critical Skills chuchu");
+  //alert("For Generating Critical Skills chuchu");
+  window.location.href = `generate_cs.php?bmid=${bmid}`;
 }
 function GenerateNCC(bmid) {
-  alert("For Generating Non compliant country clearnce acheche.");
+  //alert("For Generating Non compliant country clearnce acheche.");
+  window.location.href = `generate_ncc.php?bmid=${bmid}`;
 }
 function GenerateSP(bmid) {
   //alert("For Generating Seaferer's Position chuchu");
   window.location.href = `generate_sp.php?bmid=${bmid}`;
 }
 function GenerateWEC(bmid) {
-  alert("For Generating Watch Listed employer clearance chuchu.");
+  //alert("For Generating Watch Listed employer clearance chuchu.");
+  window.location.href = `generate_wec.php?bmid=${bmid}`;
 }
 
 function updateRecord(bmid) {

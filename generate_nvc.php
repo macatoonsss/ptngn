@@ -19,8 +19,7 @@ try {
         die("No record found.");
     }
 
-    $template = new TemplateProcessor('SEAFERERS_POSITION_TEMPLATE.docx');
-
+    $template = new TemplateProcessor('NO_VERIFIED_CONTRACT_CLEARANCE_TEMPLATE.docx');
     $template->setValue('Name of worker', $data['last_name'] . ', ' . $data['given_name'] . ' ' . $data['middle_name']);
     $template->setValue('Position', $data['position']);
     $template->setValue('Salary', $data['salary']);
@@ -42,7 +41,7 @@ try {
     }
 
     // Check if a file already exists for the bmid
-    $stmtCheck = $pdo->prepare("SELECT * FROM bm_sp_files WHERE bmid = ?");
+    $stmtCheck = $pdo->prepare("SELECT * FROM bm_nvc_files WHERE bmid = ?");
     $stmtCheck->execute([$bmid]);
     $existingFile = $stmtCheck->fetch(PDO::FETCH_ASSOC);
 
@@ -64,17 +63,17 @@ try {
         rename($tempFile, $savePath);
 
         // Update filepath just in case (optional)
-        $stmtUpdate = $pdo->prepare("UPDATE bm_sp_files SET filepath = ? WHERE bmid = ?");
+        $stmtUpdate = $pdo->prepare("UPDATE bm_nvc_files SET filepath = ? WHERE bmid = ?");
         $stmtUpdate->execute([$savePath, $bmid]);
 
     } else {
         // If no file exists, create a new one
-        $filename = $data['last_name'] . "_SEAFERERS_POSITION" . ".docx";
+        $filename = $data['last_name'] . "_NO_VERIFIED_CONTRACT_CLEARANCE" . ".docx";
         $savePath = __DIR__ . '/generated_files/' . $filename;
 
         $template->saveAs($savePath);
 
-        $stmtInsert = $pdo->prepare("INSERT INTO bm_sp_files (bmid, filename, filepath) VALUES (?, ?, ?)");
+        $stmtInsert = $pdo->prepare("INSERT INTO bm_nvc_files (bmid, filename, filepath) VALUES (?, ?, ?)");
         $stmtInsert->execute([$bmid, $filename, $savePath]);
     }
 

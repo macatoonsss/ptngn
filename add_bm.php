@@ -2,18 +2,20 @@
 require_once 'connection.php';
 
 try {
-    // Modified SQL statement to include new fields
+    // Modified SQL to include 'employer', 'employmentdurationstart', 'employmentdurationend'
     $stmt = $pdo->prepare("INSERT INTO bm (
         last_name, given_name, middle_name, sex, address, destination, 
-        position, salary, nameofthenewprincipal, employmentduration, 
+        position, salary, nameofthenewprincipal, employer, 
+        employmentdurationstart, employmentdurationend, 
         datearrival, datedeparture
     ) VALUES (
         :last_name, :given_name, :middle_name, :sex, :address, :destination, 
-        :position, :salary, :nameofthenewprincipal, :employmentduration, 
+        :position, :salary, :nameofthenewprincipal, :employer, 
+        :employmentdurationstart, :employmentdurationend, 
         :datearrival, :datedeparture
     )");
 
-    // Executing the prepared statement with the new form data
+    // Executing the prepared statement with form data
     $stmt->execute([
         ':last_name' => $_POST['last_name'],
         ':given_name' => $_POST['given_name'],
@@ -24,7 +26,9 @@ try {
         ':position' => $_POST['position'],
         ':salary' => $_POST['salary'],
         ':nameofthenewprincipal' => $_POST['nameofthenewprincipal'],
-        ':employmentduration' => $_POST['employmentduration'],
+        ':employer' => $_POST['employer'],
+        ':employmentdurationstart' => $_POST['employmentdurationstart'],
+        ':employmentdurationend' => $_POST['employmentdurationend'],
         ':datearrival' => $_POST['dateofarrival'],
         ':datedeparture' => $_POST['dateofdeparture']
     ]);
@@ -42,7 +46,9 @@ try {
         'position' => $_POST['position'],
         'salary' => $_POST['salary'],
         'nameofthenewprincipal' => $_POST['nameofthenewprincipal'],
-        'employmentduration' => $_POST['employmentduration'],
+        'employer' => $_POST['employer'],
+        'employmentdurationstart' => $_POST['employmentdurationstart'],
+        'employmentdurationend' => $_POST['employmentdurationend'],
         'datearrival' => $_POST['dateofarrival'],
         'datedeparture' => $_POST['dateofdeparture'],
     ];
